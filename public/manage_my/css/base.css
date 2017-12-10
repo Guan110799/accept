@@ -127,3 +127,11 @@ body {
 .mb_30{
     margin-bottom: 30px;
 }
+
+/* 遮挡样式 */
+#fileUpload{
+    position: absolute;
+    opacity: 0;
+    width: 82px;
+    height: 34px;
+}

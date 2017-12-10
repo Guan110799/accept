@@ -8,6 +8,8 @@
     <title>Document</title>
     <!-- 导入bootstrap的css -->
     <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.css">
+    <!-- 引入css -->
+    <link rel="stylesheet" href="./lib/bootstrap-validator/css/bootstrapValidator.min.css">
     <!-- 导入样式 -->
     <link rel="stylesheet" href="./css/base.css">
     <!-- 引入自己的css -->
@@ -29,7 +31,7 @@
         </div>
         <div class="content">
             <ul>
-                <li >
+                <li>
                     <a href="user.html">
                         <span class='glyphicon glyphicon-user'></span>用户管理</a>
                 </li>
@@ -68,9 +70,38 @@
                     商品管理
                 </li>
             </ol>
-            <!-- 圖表 -->
-            <div id="main_left" class='pull-left' style="width: 600px;height:400px;"></div>
-            <div id="main_right" class='pull-right' style="width: 600px;height:400px; "></div>
+            <!-- 按钮 modal -->
+            <button class="btn btn-default mb_30" data-toggle="modal" data-target=".modal-add">添加商品</button>
+            <!-- ta'b'le -->
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th width="5%">序号</th>
+                        <th width="25%">商品名称</th>
+                        <th width="25%">商品描述</th>
+                        <th width="10%">商品库存</th>
+                        <th width="10%">商品尺寸</th>
+                        <th width="10%">商品状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>
+                            <button class="btn btn-danger">下架</button>
+                            <button class="btn btn-primary">编辑</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 分页的ul -->
+            <ul class="pagination"></ul>
         </div>
     </div>
     <!-- 模态框 -->
@@ -98,6 +129,54 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+    <!-- 新增modal -->
+    <div class="modal fade modal-add" tabindex="-1" role="dialog">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">新增商品</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- 表单 -->
+                    <form id="form">
+                        <div class="form-group">
+                            <input name="proName" type="text" class="form-control" placeholder="请输入商品名称">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="proDesc"  class="form-control" rows="3" placeholder="请输入商品描述"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input name="num" type="text" class="form-control" placeholder="请输入商品库存">
+                        </div>
+                        <div class="form-group">
+                            <input name="price" type="text" class="form-control" placeholder="请输入商品价格">
+                        </div>
+                        <div class="form-group">
+                            <input name="oldPrice" type="text" class="form-control" placeholder="请输入商品名原价">
+                        </div>
+                        <div class="form-group">
+                            <input name="size" type="text" class="form-control" placeholder="请输入商品尺码">
+                        </div>
+                        <div class="form-group">
+                            <input id="fileUpload" type="file" class="form-control" name="pic1" data-url="/product/addProductPic" >
+                            <a class="btn btn-default" href="javascript:void(0)">上传图片</a>
+                            <span>提示:必须上传三个图片</span>
+                            <br>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="submit" form="form" class="btn btn-danger">确定</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 </body>
 
 </html>
@@ -106,9 +185,33 @@
 
 <!-- 导入bs的js -->
 <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
-<!-- echarts -->
-<script src="./lib/echarts/echarts.min.js"></script>
+<!-- 分页 -->
+<script src="./lib/bootstrap-paginator/bootstrap-paginator.min.js"></script>
+<!-- 模板 -->
+<script src="./lib/artTemplate/template.js"></script>
+<!-- 定义模板 -->
+<script id='products' type="text/html">
+    {{each rows}}
+    <tr>
+        <td>{{(page-1)*size+1+$index}}</td>
+        <td>{{$value.proName}}</td>
+        <td>{{$value.proDesc}}</td>
+        <td>{{$value.num}}</td>
+        <td>{{$value.size}}</td>
+        <td>{{$value.statu}}</td>
+        <td>
+            <button class="btn btn-danger">下架</button>
+            <button class="btn btn-primary">编辑</button>
+        </td>
+    </tr>
+    {{/each}}
+</script>
+<!-- 表单验证 -->
+<script src="./lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
+<!-- jQ 文件上传插件 -->
+<script src="./lib/jquery-fileupload/jquery.ui.widget.js"></script>
+<script src="./lib/jquery-fileupload/jquery.fileupload.js"></script>
 <!-- 公共的js -->
 <script src="./js/common.js"></script>
 <!-- 自己的js -->
-<script src="./js/index.js"></script>
+<script src="./js/products.js"></script>

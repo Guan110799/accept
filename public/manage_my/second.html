@@ -8,6 +8,8 @@
     <title>Document</title>
     <!-- 导入bootstrap的css -->
     <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.css">
+    <!-- 引入表单验证插件css -->
+    <link rel="stylesheet" href="./lib/bootstrap-validator/css/bootstrapValidator.min.css">
     <!-- 导入样式 -->
     <link rel="stylesheet" href="./css/base.css">
     <!-- 引入自己的css -->
@@ -136,38 +138,35 @@
                 <div class="modal-body">
                     <form id="form">
                         <div class="form-group">
-                            <label for="exampleInputEmail1" class="pull-left">一级分类</label>
-                            <div class="dropdown pull-left">
+                            <div class="dropdown ">
+                                <span>一级分类</span>
                                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="true">
-                                    Dropdown
+                                    <span class='select-value'>请选择</span> 
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                     <li>
                                         <a href="#">Action</a>
                                     </li>
-                                    <li>
-                                        <a href="#">Another action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Something else here</a>
-                                    </li>
-                                    <li role="separator" class="divider"></li>
-                                    <li>
-                                        <a href="#">Separated link</a>
-                                    </li>
                                 </ul>
+                                <!-- 分类id -->
+                                <input type="text" hidden name="categoryId">
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="请输入二级分类名称">
+                            <input type="text" name="brandName" class="form-control" placeholder="请输入二级分类名称">
                         </div>
                         <div class="form-group">
-                            <input type="file" class='btn btn-default' value='上传图片'>
+                            <!-- 设置文件上传控件的属性 -->
+                            <input type="file" name="pic1" data-url="/category/addSecondCategoryPic" id="fileUpload" class='btn btn-default' value='上传图片'>
+                            <a class='btn btn-default ' href="javascript:void(0)">
+                                <span class='glyphicon glyphicon-picture'></span>上传图片</a>
                         </div>
                         <div class="form-group">
                             <img style="width:100px;height:100px;" src="./images/none.png" alt="">
+                            <!-- 用来保存图片路径 -->
+                            <input type="text" name="brandLogo" hidden>
                         </div>
                     </form>
                 </div>
@@ -208,6 +207,12 @@
 </script>
 <!-- 引入分页 -->
 <script src="./lib/bootstrap-paginator/bootstrap-paginator.min.js"></script>
+
+<!-- 引入jQuery上传插件 -->
+<script src="./lib/jquery-fileupload/jquery.ui.widget.js"></script>
+<script src="./lib/jquery-fileupload/jquery.fileupload.js"></script>
+<!-- 引入表单验证插件 -->
+<script src="./lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
 <!-- 公共的js -->
 <script src="./js/common.js"></script>
 <!-- 自己的js -->
